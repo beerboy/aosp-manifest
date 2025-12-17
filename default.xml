@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- リモートリポジトリの定義 -->
+  <remote name="aosp"
+          fetch="https://android.googlesource.com"
+          review="https://android-review.googlesource.com/" />
+
+  <remote name="github"
+          fetch="https://github.com/beerboy"
+          revision="main" />
+
+  <!-- デフォルト設定 -->
+  <default remote="aosp"
+           revision="android-14.0.0_r1"
+           sync-j="4" />
+
+  <!-- AOSP コアリポジトリ（最小構成） -->
+  <project path="build/make" name="platform/build" groups="pdk" >
+    <linkfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="buildspec.mk.default" dest="buildspec.mk.default" />
+  </project>
+  <project path="build/soong" name="platform/build/soong" groups="pdk,tradefed" />
+  <project path="build/bazel" name="platform/build/bazel" groups="pdk" />
+
+  <project path="prebuilts/clang/host/linux-x86" name="platform/prebuilts/clang/host/linux-x86" groups="pdk" clone-depth="1" />
+  <project path="prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9" name="platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9" groups="pdk,linux,x86" />
+
+  <project path="system/core" name="platform/system/core" groups="pdk" />
+  <project path="system/logging" name="platform/system/logging" groups="pdk" />
+  <project path="system/libbase" name="platform/system/libbase" groups="pdk" />
+
+  <project path="frameworks/native" name="platform/frameworks/native" groups="pdk" />
+  <project path="frameworks/base" name="platform/frameworks/base" groups="pdk-cw-fs,pdk-fs" />
+
+  <project path="device/generic/goldfish" name="device/generic/goldfish" groups="pdk" />
+  <project path="device/generic/goldfish-opengl" name="device/generic/goldfish-opengl" groups="pdk" />
+
+  <project path="external/boringssl" name="platform/external/boringssl" groups="pdk" />
+  <project path="external/zlib" name="platform/external/zlib" groups="pdk" />
+
+  <!-- カスタムプロジェクト（あなたのGitHubリポジトリ） -->
+  <project path="vendor/custom/native-process"
+           name="aosp-custom-native"
+           remote="github"
+           revision="main" />
+
+  <!-- エミュレータ関連 -->
+  <project path="prebuilts/android-emulator/linux-x86_64" name="platform/prebuilts/android-emulator/linux-x86_64" groups="pdk" clone-depth="1" />
+  <project path="device/generic/car" name="device/generic/car" groups="pdk" />
+</manifest>
