@@ -11,7 +11,7 @@
 
   <!-- デフォルト設定 -->
   <default remote="aosp"
-           revision="android-14.0.0_r1"
+           revision="android14-release"
            sync-j="4" />
 
   <!-- AOSP コアリポジトリ（最小構成） -->
